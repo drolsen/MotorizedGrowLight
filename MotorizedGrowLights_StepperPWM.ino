@@ -2,7 +2,7 @@
 
 // configurable settings and pins
 int MaxSpeed = 255;
-int DelaySpeed = 128; // PWM Mimic delay (this is in miliseconds)
+int MinSpeed = 128;
 float MotorRPMS = 3.5;
 
 #define ENA 5
@@ -16,7 +16,7 @@ float MotorRPMS = 3.5;
 
 // global logic variables
 float speedOverRPM = MotorRPMS / 255; // 3.5 rotations per min, divided by 255 PWM parts
-float totalDistance = 0; //s tores total distance of a measureing pass
+float totalDistance = 0; // stores total distance of a measureing pass
 float currentDistance = 0; // used to condition again totalDistance and obtain slower speeds at either end of a track.
 
 int direcitonSwitchCount = 0; // store how many times we have changed direction.
@@ -24,15 +24,13 @@ bool limitReached = false; // limit switch direction debounce.
 
 unsigned long RPMWait = millis(); // main loop debounce to protect/prolong hardware life.
 
-bool movingForward = false;
-
 // motor instances
 L298N motor1(ENA, IN1, IN2);
 L298N motor2(ENB, IN3, IN4);
 
 void setup() {
   Serial.begin(9600);
-  
+
   // Setup limit switch pins
   pinMode(LimitSwitchA, INPUT);
   digitalWrite(LimitSwitchA, HIGH);
@@ -41,8 +39,8 @@ void setup() {
   digitalWrite(LimitSwitchB, HIGH);
   
   // Setup initial speed of motors
-  motor1.setSpeed(MaxSpeed);
-  motor2.setSpeed(MaxSpeed);
+  motor1.setSpeed(255);
+  motor2.setSpeed(255);
 
   // Setup inital direction of motors
   motor1.forward();
@@ -56,16 +54,8 @@ void loop() {
     // if we are done with measuring pass
     if (direcitonSwitchCount >= 2) {
       if (currentDistance < (totalDistance / 3) || currentDistance > ((totalDistance / 3) * 2)) {
-        motor1.stop(); // min RPMs
-        motor2.stop(); // min RPMs
-        delay(DelaySpeed);
-        if(movingForward == true) {
-          motor1.forward(); // max RPMs
-          motor2.forward(); // max RPMs           
-        } else {
-          motor1.backward(); // max RPMs
-          motor2.backward(); // max RPMs 
-        }       
+        motor1.setSpeed(MinSpeed);
+        motor2.setSpeed(MinSpeed);
       }
     } else { // measuring pass speed
       motor1.setSpeed(MaxSpeed); // max RPMs
@@ -80,7 +70,6 @@ void loop() {
       // move motoers forward
       motor1.forward(); 
       motor2.forward();
-      movingForward = true;
     } else if (digitalRead(LimitSwitchA) == HIGH && limitReached == true) {
       limitReached = false; // reset limitReached debouncer
       direcitonSwitchCount++; // increment numuber of direction changes.
@@ -94,7 +83,6 @@ void loop() {
       // move motors backwards
       motor1.backward();
       motor2.backward();
-      movingForward = false;
     } else if (digitalRead(LimitSwitchB) == HIGH && limitReached == true) {
       limitReached = false; // reset limitReached debouncer
       direcitonSwitchCount++; // increment number of direction changes.
