@@ -1,6 +1,9 @@
 # Motorized Grow Light
 
-Here you will be able to learn and download the required files to build your own arduino based motorized grow light for under 100$.
+Here you will learn to build your own Arduino based motorized grow light track for just under $100 USD.
+This build can be ran on any length track and has canopy light distribution logic built in. 
+
+Motor can be powered on and off at any point without error canopy logic (perfect for light timers and recommened).
 
 ## Getting Started & Things to Know
 
@@ -15,6 +18,7 @@ However, because we use of the L298N Motor H-Bridge you can choose any of the fo
 - 1 DC 24V GearBox Motor
 - 1 DC 12/24V Stepper Motor (requires code change)
 ```
+
 Besides being able to expand motor setups, we also use the L298N to perform PWM on Stepper Motor setups.
 
 ### What is PWM?
