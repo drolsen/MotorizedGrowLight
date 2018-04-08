@@ -8,6 +8,7 @@ This is a DIY project, so there is actual physical building required but the bui
 
 This project makes use of a low cost 12V DC GearBox motor NOT a costly high torque stepper motor. 
 However, because we use of the L298N Motor H-Bridge you can choose any of the following motor setups:
+
 ```
 - 1 DC 12V GearBox Motor (what tutorial uses)
 - 2 DC 12V GearBox Motors
@@ -32,27 +33,28 @@ If you run a motorized grow light system from end to end without any speed chang
 ### Prerequisites
 
 ```
-2 (1 in. x 2 in. x 8 ft) wood boards ($4)
-1 Gearbox High torque 3.5RPM DC Motor ($8)
-1 RC Card Tire ($9)
-1 RC Car Tire Coupler ($6)
-2 Limit switches ($6)
-1 Arduino nano ($14)
-1 L298N H-Bridge Module ($10)
-1 8-foot closet door track ($24)
-1 40 PCS Double Sided Protoboards ($14) or boradboard
-1 12v DC Female & Male power connection adapters ($3)
+- 2 (1 in. x 2 in. x 8 ft) wood boards ($4)
+- 1 Gearbox High torque 3.5RPM DC Motor ($8)
+- 1 RC Card Tire ($9)
+- 1 RC Car Tire Coupler ($6)
+- 2 Limit switches ($6)
+- 1 Arduino nano ($14)
+- 1 L298N H-Bridge Module ($10)
+- 1 8-foot closet door track ($24)
+- 1 40 PCS Double Sided Protoboards ($14) or boradboard
+- 1 12v DC Female & Male power connection adapters ($3)
 ```
 
 ### Installing
 
-Download copy of repository.
-Open Download.
-Copy libraries/L298N folder to the default location of your arduino install's libraries folder.
-Connect computer and Arduino nano via USB/firewire cable.
-Open MotorizedGrowLights.ino at root of download in Arduino IDE.
-Upload MotorizedGrowLights.ino to Ardino Nano.
-
+```
+- Download copy of repository.
+- Open Download.
+- Copy libraries/L298N folder to the default location of your arduino install's libraries folder.
+- Connect computer and Arduino nano via USB/firewire cable.
+- Open MotorizedGrowLights.ino at root of download in Arduino IDE.
+- Upload MotorizedGrowLights.ino to Ardino Nano.
+```
 
 ## First Run
 
